@@ -34,11 +34,11 @@ function allPipelines(data)
     % CALCULATION
     if data.parallel && strcmpi(data.processing_option, 'slice_by_slice')
         % do parallelized (only works when slice_by_slice)
-        matlabpool('open', data.parallel);      
+        parpool(data.parallel);      
         parfor i = 1:slice_loop
             allSteps(data, i);
         end        
-        matlabpool('close');        
+%         matlabpool('close');        
     else
         % standard loop over slices
         for i = 1:slice_loop
